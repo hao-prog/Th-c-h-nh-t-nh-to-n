@@ -1,1 +1,1 @@
-# Th-c-h-nh-t-nh-to-n
+# Thuc hanh tinh toan
