@@ -1,5 +1,5 @@
 function [p] = predict(X)
-  load('weights.mat', 'w');
+  load('w.mat', 'w');
   
   n_samples = size(X, 1);
   
