@@ -1,6 +1,6 @@
 function [w] = train(X, y)
   
-  learning_rate = 0.9;
+  learning_rate = 0.5;
   max_iter = 25;
   tol = 10^-5;
   
@@ -15,8 +15,9 @@ function [w] = train(X, y)
   n_classes = size(y, 2);
   
   w = rand(n_features, n_classes);
-
-  for k=1:max_iter
+  ces = [];
+  
+  for k = 1:max_iter
     wold = w;
     rp = randperm(n_samples);
     for i = rp
@@ -27,8 +28,17 @@ function [w] = train(X, y)
         
         w = w-((learning_rate^k)*(xi'*error));
     end
-    if sumsq(w - wold) <= tol 
+    
+    p = softmax(X*w);
+    ce = cross_entropy(y, p);
+    ces(end + 1) = ce;
+    
+    if sumsq(w - wold(end)) <= tol 
       break;
     end
-  end  
+  end
+  
+  save('w.mat', 'w');
+  save('ces.mat', 'ces');
+  
 end
